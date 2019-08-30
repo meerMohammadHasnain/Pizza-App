@@ -55,18 +55,6 @@ export default function(router) {
           });
   });
 
-  // @TODO: This route is just for ease of inserting menu items in the database.
-  // It Should be removed before pushing in Github.
-  router.post('/menu', async function(req, res) {
-    await model.insertMenuItem(req.body)
-        .then(response => {
-          res.status(response.statusCode).send(response.body);
-        })
-        .catch(err => {
-          res.status(err.statusCode).send(err.body);
-        });
-  });
-
   // Handle invalid method for the route '/menu'
   router.all('/menu', function(req, res, next) {
     if(['GET'].indexOf(req.method) == -1) {
