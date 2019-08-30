@@ -1,6 +1,6 @@
 /*
 *
-* Helper functions for the application
+* Helper functions for the microservice
 *
 */
 
