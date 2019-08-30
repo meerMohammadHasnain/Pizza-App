@@ -120,27 +120,5 @@ MenuModel.prototype.getMenuItemById = async function(itemId, email) {
   }
 };
 
-// @TODO: This model function is just for ease of inserting menu items in the database.
-// It Should be removed before pushing the code to Github.
-MenuModel.prototype.insertMenuItem = async function(menuItemData) {
-  // Connect to the database
-  await menuDataAccess.connectDatabase()
-      .catch(err => {
-        logger.error("[%s] Could not connect to the database, error: [%s]", err);
-        throw {'statusCode' : 500, 'body' : {'error' : 'Encountered an unexpected error while saving the menu item'}};
-      });
-  // Insert the menu item document into the database
-  var response = await menuDataAccess.insertMenuItem(menuItemData)
-       .catch(err => {
-        logger.error("[%s] Encountered an unexpected error while saving the menu item, error: [%s]", err);
-        throw {'statusCode' : 500, 'body' : {'error' : 'Encountered an unexpected error while saving the menu item'}};
-      });
-  // Return the response
-  return {
-   'statusCode' : 201,
-   'body' : response
-  };
-};
-
 // Export the module
 export default new MenuModel();
