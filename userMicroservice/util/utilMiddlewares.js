@@ -28,7 +28,6 @@ UtilMiddlewares.prototype.catchParsingError = function() {
 UtilMiddlewares.prototype.defaultErrorHandler = function() {
   return function(err, req, res, next) {
     if(err) {
-      console.log(err);
       res.status(500).send({'error' : 'Encountered an unexpected error while serving the request'});
     } else {
       next();
