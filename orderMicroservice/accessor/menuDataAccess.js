@@ -62,19 +62,6 @@ MenuDataAccess.prototype.getMenuItemById = async function(filter) {
        throw err;
      });
   return response;
-},
-
-// @TODO: This data access function is just for ease of inserting menu items in the database.
-// It Should be removed before pushing the code to Github.
-MenuDataAccess.prototype.insertMenuItem = async function(menuItemData) {
-  var document = new Model(menuItemData);
-  var response = await document.save()
-        .catch(err => {
-          mongoose.connection.close();
-          throw err;
-        });
-  mongoose.connection.close();
-  return response;
 };
 
 // Export the module
