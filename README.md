@@ -49,12 +49,12 @@ babel-preset-stage-0 |^6.24.1           |
 ### Features
 
 #### Load balancing, Scalability and Service Discovery
-* Each microservice is an independent application that, when started, registers itself in *`Consul`* (service registry). Refer official [docmentation](https://www.consul.io/api/index.html) of Consul API for more insights.
+* Each microservice is an independent application that, when started, registers itself in *`Consul`* (service registry). Refer official [documentation](https://www.consul.io/api/index.html) of Consul API for more insights.
 * The services gets registered such that they will automatically get deregistered from Consul in case they get down.
 * Each microservice has a heartbeat route that is actually used by *`Consul health check`* to inspect the status of the microservice.
 * All the microservices can be scaled easily and managed by a load balancer. The one used in development is *`NGINX`*. Refer official [documentation](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/) of NGINX to gaining further insights into using it as a server side load balancer.
 * In case the microservices are desired to be deployed without a load balancer, the same can be accomplished by making a few modification in their respective configuration files, the details of which are commented therein.
-* The microservices can be scaled by deploying multiple instances on same or different servers, in order to achieve high performance. Refer [how to configure applications for multi-instance deployment](#Configurations) for further insights.
+* The microservices can be scaled by deploying multiple instances on same or different servers, in order to achieve high performance. Refer [Configurations](#Configurations) section for further insights.
 * In order to automate the process of service discovery by the load balancer, it is expected that a daemon thread like *`consul-template`* should be triggered before deployment that will write the configuration file of NGINX and reload it every time a microservice gets registered in Consul.
 * Every request by the client will be targeted toward the load balancer, which in turn, will forward them to the respective instance of the concerned microservice.
 
@@ -104,7 +104,17 @@ $ cd Pizza-App/userMicroservice/
 # Install the dependencies
 npm install
 
-# Create a .env file including all the environment variables containing your hash secret, auth token secret, API secret keys and creds
+# Create a .env file including all the required environment variables
+# and place it in the root folder of the concerned microservice.
+# The complete list of environment variables is:
+# HASHING_SECRET
+# AUTH_TOKEN_SECRET
+# KEY_FILE_LOCATION
+# CERT_FILE_LOCATION
+# STRIPE_AUTH_TOKEN
+# MAILGUN_API_KEY
+# MAILGUN_API_PERSONALISED_DOMAIN
+# EMAIL_TEMPLATE_ID
 
 # Set the deployment environment (using 'development' here)
 $ export NODE_ENV=development
