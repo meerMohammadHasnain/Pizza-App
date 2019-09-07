@@ -56,13 +56,11 @@ InvoiceModel.prototype.fetchUserData = function(email, authToken) {
       if(!err && res.statusCode == 200) {
         // Parse the body
         var parsedBody = JSON.parse(body);
-        // Resolve the promoise with the parsed body
+        // Resolve the promise with the parsed body
         resolve(parsedBody);
       } else if(!err && res.statusCode == 400){
         reject({'statusCode' : 400, 'body' : {'error' : 'User doesn\'t exist'}});
       } else {
-        console.log(res.statusCode);
-        console.log("Error" + err);
         logger.error("[%s] Encountered an unexpected error while fetching user details for invoice generation, error: [%s]", email, err);
         reject({'statusCode' : 500, 'body' : {'error' : 'Encountered an unexpected error while fetching user details for invoice generation'}});
       }
